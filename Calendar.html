@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>カレンダー</title>
+</head>
+
+<link href="css/style.css" rel="stylesheet" />
+
+<body>
+<div class="calendar-wrapper">
+<table>
+    <thead>
+      <tr>
+        <th>日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th>土</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ここに日付を入れる -->
+      <script>
+  // ここに上記のJavaScriptコードを貼り付ける
+  const today = new Date();
+  const year = today.getFullYear();
+const month = today.getMonth();
+const firstDay = new Date(year, month, 1).getDay();
+const lastDate = new Date(year, month + 1, 0).getDate();
+const tbody = document.querySelector('tbody');
+let html = '';
+let day = 1;
+
+for (let i = 0; i < 6; i++) {
+  html += '<tr>';
+  for (let j = 0; j < 7; j++) {
+    if (i === 0 && j < firstDay) {
+      html += '<td></td>';
+    } else if (day > lastDate) {
+      html += '<td></td>';
+    } else {
+		if(j == 0){
+			 html += `<td id="niti">${day}</td>`;
+		}else if(j == 6){ 
+			 html += `<td id="dou">${day}</td>`; 
+		}else{
+			 html += `<td>${day}</td>`;
+		}
+      day++;
+    }
+  }
+  html += '</tr>';
+}
+
+tbody.innerHTML = html;
+const specialDate = today.getDate(); // 今日の日付を指定
+const cells = tbody.querySelectorAll('td');
+
+
+
+cells.forEach((cell) => {
+  if (parseInt(cell.textContent) === specialDate) {
+    cell.style.backgroundColor = '#ff0';
+  }
+});
+
+document.write(+year + "年" + '<br>');
+const Month = month +1;
+document.write(Month + "月");
+
+
+	</script>
+    </tbody>
+  </table>
+</body>
+</html>
